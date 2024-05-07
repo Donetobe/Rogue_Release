@@ -15,7 +15,8 @@ namespace Rogue
         {
             Map testi = new Map();
             testi.mapWidth = 8;
-            testi.mapTiles = new int[] {
+            testi.layers = new MapLayer[3];
+            testi.layers[0].mapTiles = new int[] {
             2, 2, 2, 2, 2, 2, 2, 2,
             2, 1, 1, 2, 1, 1, 1, 2,
             2, 1, 1, 2, 1, 1, 1, 2,
@@ -24,9 +25,10 @@ namespace Rogue
             2, 1, 1, 1, 1, 1, 1, 2,
             2, 2, 2, 2, 2, 2, 2, 2
             };
+         
             return testi;
         }
-       public Map ReadMapFromFile(string fileName)
+        public Map ReadMapFromFile(string fileName)
         {
             bool exists = File.Exists(fileName);
 
@@ -45,6 +47,8 @@ namespace Rogue
 
             Map loadedMap = JsonConvert.DeserializeObject<Map>(fileContents);
 
+
+           
             return loadedMap;
         }
     }

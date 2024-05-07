@@ -5,33 +5,50 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ZeroElectric.Vinculum;
+
 
 namespace Rogue
 {
     internal class Game
     {
+        PlayerCharacter player;
+        
+        Map lvl1;
 
+        Enemy enemy;
+
+        public static readonly int tileSize = 16;
+
+        const int screen_width = 1280;
+        const int screen_height = 720;
         public void Run()
         {
-           
 
-            
-             
+
+
+
 
             // Prepare to show game
             Console.CursorVisible = false;
 
             // A small window
             Console.WindowWidth = 60;
+            
+            
             Console.WindowHeight = 26;
 
             // Create player
-            PlayerCharacter player = new PlayerCharacter('@', ConsoleColor.Green);
+            player = new PlayerCharacter('@', Raylib.RED, ConsoleColor.Green);
+
 
             MapReader reader = new MapReader();
 
-            Map lvl1 = reader.ReadMapFromFile("mapfile.json");
-         
+
+            
+           
+            
+
             player.position = new Point2D(3, 3);
 
             while (true)
@@ -158,19 +175,69 @@ namespace Rogue
             // Init and run game loop until ESC is pressed
             Console.Clear();
 
+            Raylib.InitWindow(screen_width, screen_height, "Raylib");
 
 
+            Texture imageTexture = Raylib.LoadTexture("Images/tilemap.png");
+
+            lvl1 = reader.ReadMapFromFile("mapfile.json");
+
+            lvl1.SetImageAndIndex(imageTexture, 12, 109);
+            lvl1.LoadEnemiesAndItems();
+            player.SetImageAndIndex(imageTexture, 12, 109);
+
+
+
+            while (Raylib.WindowShouldClose() == false)
+            {
+                GameLoop();
+            }
+
+
+            Raylib.CloseWindow();
+
+        }
+
+        private void DrawRay()
+        {
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Raylib.BLACK);
+
+            // Draw rest of the game here
+
+            Raylib.EndDrawing();
+        }
+
+        void GameLoop()
+        {
+            while (true)
+            {
+                DrawRay();
+                Update();
+                Draw();
+                
+            }
+        }
+        
+        void Draw()
+        {
+            Console.Clear();
             lvl1.DrawMap();
-
             player.Draw();
             
-            bool game_running = true;
-            while (game_running)
-            {
+        }
+
+
+        void Update()
+        {
+
+            Point2D newPlace = player.position;
+            /*
                 ConsoleKeyInfo key = Console.ReadKey();
-                Point2D newPlace = player.position;
+               
                 switch (key.Key)
                 {
+
                     case ConsoleKey.UpArrow:
                         newPlace.y -= 1;
                         break;
@@ -181,30 +248,42 @@ namespace Rogue
                         newPlace.x -= 1;
                         break;
                     case ConsoleKey.RightArrow:
-                       newPlace.x += 1;
+                        newPlace.x += 1;
                         break;
 
                     case ConsoleKey.Escape:
-                        game_running = false;
+                        
                         break;
 
                     default:
                         break;
                 };
+            */
 
-                if (lvl1.mapTiles[newPlace.x + newPlace.y * lvl1.mapWidth] != 2)
-                {
-                   player.position = newPlace;
-                }
-                Console.Clear();
-                lvl1.DrawMap();
-                player.Draw();
-                
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_UP))
+            {
+                newPlace.y -= 1;
+            }
+            else if (Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN))
+            {
+                newPlace.y += 1;
+            }
+            else if (Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
+            {
+                newPlace.x -= 1;
+            }
+            else if (Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
+            {
+                newPlace.x += 1;
             }
 
-           
+            if (lvl1.GetTileAt(newPlace.x, newPlace.y) == Map.MapTile.Floor)
+                {
+                    player.position = newPlace;
+                }
+
             
-           
+ 
         }
     }
 }
