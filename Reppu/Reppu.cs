@@ -89,7 +89,7 @@ namespace Reppu
             public Miekka(): base(5, 3, "Miekka") { }
         }
 
-
+       
         public void Run()
         {
 

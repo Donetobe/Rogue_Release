@@ -16,31 +16,37 @@ internal class Map
 
         int imagesPerRow;
 
-        List<Enemy> enemies;
-        List<Item> items;
+        public List<Enemy> enemies;
+        public List<Item> items;
 
 
         public enum MapTile : int
         {
             Floor = 0,
             Wall = 14,
-            enemy = 89
+            Enemy = 96
         }
 
         
 
-    public int getTileAt(Point2D newPlace)
+    public int getTileAt(Vector2 newPlace)
         {
             MapLayer ground = layers[0];
-            return (ground.mapTiles[newPlace.x + newPlace.y * mapWidth]);
+            return (ground.mapTiles[(int)newPlace.X + (int)newPlace.Y * mapWidth]);
             
                
             
         }
 
-        public MapTile GetTileAt(int x, int y)
+        public MapTile GetTileAtGround(int x, int y)
         {
             MapLayer ground = layers[0];
+            return (MapTile)(ground.mapTiles[x + y * mapWidth]);
+        }
+
+        public MapTile GetTileAtEnemy(int x, int y)
+        {
+            MapLayer ground = layers[2];
             return (MapTile)(ground.mapTiles[x + y * mapWidth]);
         }
 
@@ -61,6 +67,7 @@ internal class Map
                 for (int col = 0; col < mapWidth; col++)
                 {
                     int tileId = ground.mapTiles[row * mapWidth + col];
+                    tileId--;
                     Console.SetCursorPosition(col, row);
 
                    
@@ -114,7 +121,7 @@ internal class Map
                         case 0:
                             // ei mitään tässä kohtaa
                             break;
-                        case 89:
+                        case 96:
                             Enemy o = new Enemy("Orc", position, Raylib.WHITE);
                             o.SetImageAndIndex(image1, imagesPerRow, tileId);
                             enemies.Add(o);

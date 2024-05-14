@@ -13,11 +13,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Users\s2200872\Downloads\TurboMapReader-main\TurboMapReader.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Images\tilemap.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="mapfile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="tilded\Rogue.tmj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

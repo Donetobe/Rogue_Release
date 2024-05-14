@@ -28,7 +28,7 @@ namespace Rogue
         public Race rotu;
         public Class hahmoluokka;
 
-        public Point2D position;
+        public Vector2 position;
 
 
         Texture image1;
@@ -57,21 +57,21 @@ namespace Rogue
 
         public void Move(int x_move, int y_move)
         {
-            position.x += x_move;
-            position.y += y_move;
+            position.X += x_move;
+            position.Y += y_move;
             // This keeps the unit inside Console window
-            position.x = Math.Clamp(position.x, 0, Console.WindowWidth - 1);
-            position.y = Math.Clamp(position.y, 0, Console.WindowHeight - 1);
+            position.X = Math.Clamp(position.X, 0, Console.WindowWidth - 1);
+            position.Y = Math.Clamp(position.Y, 0, Console.WindowHeight - 1);
 
         }
 
         public void Draw()
         {
-            int pixelX = (int)(position.x * Game.tileSize);
-            int pixelY = (int)(position.y * Game.tileSize);
+            int pixelX = (int)(position.X * Game.tileSize);
+            int pixelY = (int)(position.Y * Game.tileSize);
 
             Console.ForegroundColor = color1;
-            Console.SetCursorPosition(position.x, position.y);
+            Console.SetCursorPosition((int)position.X, (int)position.Y);
             Console.Write(image);
 
             Rectangle imageRect = new Rectangle(imagePixelX, imagePixelY, Game.tileSize, Game.tileSize);

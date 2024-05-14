@@ -13,6 +13,14 @@ namespace Blackjack
                 "club 2", "club 3", "club 4", "club 5", "club 6", "club 7", "club 8", "club 9", "club 10", "club Jack", "club Queen", "club King", "club ACE",
                 "diamonds 2", "diamonds 3", "diamonds 4", "diamonds 5", "diamonds 6", "diamonds 7", "diamonds 8", "diamonds 9", "diamonds 10", "diamonds Jack", "diamonds Queen", "diamonds King", "diamonds ACE",
                 "hearts 2", "hearts 3", "hearts 4", "hearts 5", "hearts 6", "hearts 7", "hearts 8", "hearts 9", "hearts 10", "hearts Jack", "hearts Queen", "hearts King", "hearts ACE",
+                "spades 2", "spades 3", "spades 4", "spades 5", "spades 6", "spades 7", "spades 8", "spades 9", "spades 10", "spades Jack", "spades Queen", "spades King", "spades ACE",
+                "club 2", "club 3", "club 4", "club 5", "club 6", "club 7", "club 8", "club 9", "club 10", "club Jack", "club Queen", "club King", "club ACE",
+                "diamonds 2", "diamonds 3", "diamonds 4", "diamonds 5", "diamonds 6", "diamonds 7", "diamonds 8", "diamonds 9", "diamonds 10", "diamonds Jack", "diamonds Queen", "diamonds King", "diamonds ACE",
+                "hearts 2", "hearts 3", "hearts 4", "hearts 5", "hearts 6", "hearts 7", "hearts 8", "hearts 9", "hearts 10", "hearts Jack", "hearts Queen", "hearts King", "hearts ACE",
+                "spades 2", "spades 3", "spades 4", "spades 5", "spades 6", "spades 7", "spades 8", "spades 9", "spades 10", "spades Jack", "spades Queen", "spades King", "spades ACE",
+                "club 2", "club 3", "club 4", "club 5", "club 6", "club 7", "club 8", "club 9", "club 10", "club Jack", "club Queen", "club King", "club ACE",
+                "diamonds 2", "diamonds 3", "diamonds 4", "diamonds 5", "diamonds 6", "diamonds 7", "diamonds 8", "diamonds 9", "diamonds 10", "diamonds Jack", "diamonds Queen", "diamonds King", "diamonds ACE",
+                "hearts 2", "hearts 3", "hearts 4", "hearts 5", "hearts 6", "hearts 7", "hearts 8", "hearts 9", "hearts 10", "hearts Jack", "hearts Queen", "hearts King", "hearts ACE",
                 "spades 2", "spades 3", "spades 4", "spades 5", "spades 6", "spades 7", "spades 8", "spades 9", "spades 10", "spades Jack", "spades Queen", "spades King", "spades ACE"
              };
 
@@ -29,8 +37,8 @@ namespace Blackjack
 
         
 
-        int cardsToGive = 2;
-        int cardCount = 0;
+        int cardsToGive;
+        int cardCount;
 
         int cardCountDealer = 0;
         int cardsToGiveDealer = 2;
@@ -69,8 +77,17 @@ namespace Blackjack
 
                 }
 
+                playerNumber = 0;
+                dealerNumber = 0;
+
                 playerHasAce = false;
                 dealerHasAce = false;
+
+                playerCards = new List<string>();
+                dealerCards = new List<string>();
+
+                cardsToGive = 2;
+                cardCount = 0;
 
                 GivePlayerCards();
                 GiveDealerCards();

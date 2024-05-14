@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using ZeroElectric.Vinculum;
+using TurboMapReader;
 
 
 namespace Rogue
@@ -15,6 +16,8 @@ namespace Rogue
         PlayerCharacter player;
         
         Map lvl1;
+
+
 
         Enemy enemy;
 
@@ -49,7 +52,7 @@ namespace Rogue
            
             
 
-            player.position = new Point2D(3, 3);
+            player.position = new Vector2(3, 3);
 
             while (true)
             {
@@ -182,6 +185,8 @@ namespace Rogue
 
             lvl1 = reader.ReadMapFromFile("mapfile.json");
 
+            lvl1 = reader.ReadTiledMapFromFile("tilded/Rogue.tmj");
+
             lvl1.SetImageAndIndex(imageTexture, 12, 109);
             lvl1.LoadEnemiesAndItems();
             player.SetImageAndIndex(imageTexture, 12, 109);
@@ -231,7 +236,7 @@ namespace Rogue
         void Update()
         {
 
-            Point2D newPlace = player.position;
+            Vector2 newPlace = player.position;
             /*
                 ConsoleKeyInfo key = Console.ReadKey();
                
@@ -239,16 +244,16 @@ namespace Rogue
                 {
 
                     case ConsoleKey.UpArrow:
-                        newPlace.y -= 1;
+                        newPlace.Y -= 1;
                         break;
                     case ConsoleKey.DownArrow:
-                        newPlace.y += 1;
+                        newPlace.Y += 1;
                         break;
                     case ConsoleKey.LeftArrow:
-                        newPlace.x -= 1;
+                        newPlace.X -= 1;
                         break;
                     case ConsoleKey.RightArrow:
-                        newPlace.x += 1;
+                        newPlace.X += 1;
                         break;
 
                     case ConsoleKey.Escape:
@@ -262,28 +267,44 @@ namespace Rogue
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_UP))
             {
-                newPlace.y -= 1;
+                newPlace.Y -= 1;
             }
             else if (Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN))
             {
-                newPlace.y += 1;
+                newPlace.Y += 1;
             }
             else if (Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
             {
-                newPlace.x -= 1;
+                newPlace.X -= 1;
             }
             else if (Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
             {
-                newPlace.x += 1;
+                newPlace.X += 1;
             }
 
-            if (lvl1.GetTileAt(newPlace.x, newPlace.y) == Map.MapTile.Floor)
+
+
+            if (lvl1.GetTileAtGround((int)newPlace.X, (int)newPlace.Y) != Map.MapTile.Wall)
                 {
                     player.position = newPlace;
+
+                foreach (var item in lvl1.enemies)
+                {
+                    if (item.position == player.position)
+                    {
+                        Console.WriteLine($"You hit enemy {item.name}");
+                    }
                 }
 
-            
- 
+
+                foreach (var item in lvl1.items)
+                {
+                    if (item.position == player.position)
+                    {
+                        Console.WriteLine($"You hit item {item.name}");
+                    }
+                }
+            }
         }
     }
 }
