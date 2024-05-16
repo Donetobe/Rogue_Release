@@ -284,7 +284,7 @@ namespace Rogue
 
 
 
-            if (lvl1.GetTileAtGround((int)newPlace.X, (int)newPlace.Y) != Map.MapTile.Wall)
+            if (lvl1.GetTileAtGround((int)newPlace.X, (int)newPlace.Y) == Map.MapTile.Floor)
                 {
                     player.position = newPlace;
 

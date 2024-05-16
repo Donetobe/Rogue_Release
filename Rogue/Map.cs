@@ -22,9 +22,9 @@ internal class Map
 
         public enum MapTile : int
         {
-            Floor = 0,
-            Wall = 14,
-            Enemy = 96
+            Floor = 1,
+            Wall = 15,
+            Enemy = 110, 
         }
 
         
@@ -76,7 +76,7 @@ internal class Map
                             int pixelX = (int)(col * Game.tileSize);
                             int pixelY = (int)(row * Game.tileSize);
 
-                            Console.Write(".");
+                            //Console.Write(".");
                             Rectangle imageRect = new Rectangle(imagePixelX, imagePixelY, Game.tileSize, Game.tileSize);
                             // Raylib.DrawRectangle(pixelX, pixelY, Game.tileSize, Game.tileSize, color);
                             Raylib.DrawTextureRec(image1, imageRect, new Vector2(pixelX, pixelY), Raylib.WHITE);
@@ -121,13 +121,20 @@ internal class Map
                         case 0:
                             // ei mitään tässä kohtaa
                             break;
-                        case 96:
+                        case 110:
                             Enemy o = new Enemy("Orc", position, Raylib.WHITE);
-                            o.SetImageAndIndex(image1, imagesPerRow, tileId);
+                            o.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
                             enemies.Add(o);
                             break;
-                        case 2:
-                            // jne...
+                        case 97:
+                            Enemy a = new Enemy("knight", position, Raylib.WHITE);
+                            a.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
+                            enemies.Add(a);
+                            break;
+                        case 112:
+                            Enemy w = new Enemy("wizard", position, Raylib.WHITE);
+                            w.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
+                            enemies.Add(w);
                             break;
                     }
                 }
@@ -152,13 +159,20 @@ internal class Map
                         case 0:
                             // ei mitään tässä kohtaa
                             break;
-                        case 89:
+                        case 90:
                             Item i = new Item("chest", position, Raylib.WHITE);
-                            i.SetImageAndIndex(image1, imagesPerRow, tileId);
+                            i.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
                             items.Add(i);
                             break;
-                        case 2:
-                            // jne...
+                        case 119:
+                            Item a = new Item("axe", position, Raylib.WHITE);
+                            a.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
+                            items.Add(a);
+                            break;
+                        case 104:
+                            Item b = new Item("knife", position, Raylib.WHITE);
+                            b.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
+                            items.Add(b);
                             break;
                     }
                 }
