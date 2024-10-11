@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Users\s2200872\Downloads\TurboMapReader-main\TurboMapReader.csproj" />
+    <ProjectReference Include="..\..\RayGuiCreator\RayGuiCreator\RayGuiCreator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,12 @@
     </None>
     <None Update="mapfile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sound\Bass Drum.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Sound\Car Shwoosh.lch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="tilded\Rogue.tmj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

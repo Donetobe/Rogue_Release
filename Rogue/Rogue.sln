@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rogue", "Rogue.csproj", "{F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboMapReader", "..\..\..\Users\s2200872\Downloads\TurboMapReader-main\TurboMapReader.csproj", "{65F8C41F-6B9F-4357-8190-81754167DDEF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayGuiCreator", "..\..\RayGuiCreator\RayGuiCreator\RayGuiCreator.csproj", "{4EEDE54B-3DB7-4365-A1B0-6FDCFAE8711D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{65F8C41F-6B9F-4357-8190-81754167DDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65F8C41F-6B9F-4357-8190-81754167DDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65F8C41F-6B9F-4357-8190-81754167DDEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EEDE54B-3DB7-4365-A1B0-6FDCFAE8711D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EEDE54B-3DB7-4365-A1B0-6FDCFAE8711D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EEDE54B-3DB7-4365-A1B0-6FDCFAE8711D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EEDE54B-3DB7-4365-A1B0-6FDCFAE8711D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
