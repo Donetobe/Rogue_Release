@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using Newtonsoft.Json;
+using System.Numerics;
 using System.Text.RegularExpressions;
 using ZeroElectric.Vinculum;
 
@@ -27,9 +28,10 @@ internal class Map
             Enemy = 110, 
         }
 
-        
+        List<Enemy> enemyTypes;
 
-    public int getTileAt(Vector2 newPlace)
+
+        public int getTileAt(Vector2 newPlace)
         {
             MapLayer ground = layers[0];
             return (ground.mapTiles[(int)newPlace.X + (int)newPlace.Y * mapWidth]);
@@ -98,10 +100,47 @@ internal class Map
             }
         }
 
+        public void LoadEnemyTypes(string filename)
+        {
+            enemyTypes = new List<Enemy>();
+            // TODO: Tarkista että tiedosto on olemassa.
+            if (File.Exists(filename))
+            {
+                // TODO: Lue tiedoston sisältö samalla tavalla kuin
+                // kentän lataamisessa.
+                string fileContents;
 
-        
+                using (StreamReader reader = File.OpenText(filename))
+                {
+                    fileContents = reader.ReadToEnd();
+                }
+
+                // TODO: Käytä NewtonSoft.JSON kirjastoa ja muuta tiedoston
+                // sisältö List<Enemy> tai Enemy[] muotoon
+                enemyTypes = JsonConvert.DeserializeObject<List<Enemy>>(fileContents);
+            }
+        }
+        private Enemy CreateEnemyBySpriteId(int spriteId)
+        {
+            foreach (Enemy template in enemyTypes)
+            {
+                // TODO: Onko tällä enemyllä sama spriteId kuin mitä on saatiin parametrina
+                if (template.tileId == spriteId)
+                {
+                    // Palauta kopio.
+                    // Jos palauttaisit suoraan template:n, olisivat
+                    // kaikki samanlaiset viholliset yksi ja sama vihollinen
+                    return new Enemy(template);
+                }
+            }
+            // TODO: Jos sopivaa ei löytyny, näytä virheilmoitus ja palauta null tai testivihollinen
+            Console.WriteLine($"Error, no enemy found with id: {spriteId}");
+            return null;
+}
+
         public void LoadEnemiesAndItems()
         {
+            LoadEnemyTypes("enemies.json");
             enemies = new List<Enemy>();
 
 
@@ -116,26 +155,16 @@ internal class Map
                     Vector2 position = new Vector2(x, y);
                     int index = x + y * mapWidth;
                     int tileId = enemyTiles[index];
-                    switch (tileId)
+                    if (tileId != 0)
                     {
-                        case 0:
-                            // ei mitään tässä kohtaa
-                            break;
-                        case 110:
-                            Enemy o = new Enemy("Orc", position, Raylib.WHITE);
-                            o.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
-                            enemies.Add(o);
-                            break;
-                        case 97:
-                            Enemy a = new Enemy("knight", position, Raylib.WHITE);
-                            a.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
-                            enemies.Add(a);
-                            break;
-                        case 112:
-                            Enemy w = new Enemy("wizard", position, Raylib.WHITE);
-                            w.SetImageAndIndex(image1, imagesPerRow, tileId -= 1);
-                            enemies.Add(w);
-                            break;
+                        Enemy newenemy = CreateEnemyBySpriteId((int)tileId);
+                        if (newenemy != null)
+                        {
+                            newenemy.SetImageAndIndex(image1, imagesPerRow, tileId);
+                            newenemy.position = position;
+                            enemies.Add(newenemy);
+                        }
+                   
                     }
                 }
             }
