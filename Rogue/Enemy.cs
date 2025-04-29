@@ -11,7 +11,10 @@ namespace Rogue
 {
     public class Enemy
     {
-      
+      /// <summary>
+      /// This class in used to set up and draw the enemies for the main gameloop
+      /// It is also used in the enemyeditor to create the enemies before the game starts
+      /// </summary>
 
         public string name;
         public Vector2 position;
@@ -25,6 +28,8 @@ namespace Rogue
         public int tileId;
         public int hp;
         public Enemy() { }
+
+
         public Enemy(Enemy copyFrom)
         {
             //Copies enemy variables for the editor
@@ -38,6 +43,14 @@ namespace Rogue
            
 
         }
+        /// <summary>
+        /// This function is used to set up the graphics for the enemies
+        /// </summary>
+        /// <param name="atlasImage">Is the image where the enemy graphics are taken from </param>
+        /// <param name="imagesPerRow">Is used to calculate the position of the correct location of the
+        /// specific graphic </param>
+        /// <param name="index"> Is the location of the correct enemy graphic </param>
+        /// <returns> The function will return a small part of the atlasImage that shoul contain the enemy image</returns>
         public void SetImageAndIndex(Texture atlasImage, int imagesPerRow, int index)
         {
             //Sets up the tilemap for the enemy layer
@@ -45,14 +58,13 @@ namespace Rogue
             imagePixelX = (index % imagesPerRow) * Game.tileSize;
             imagePixelY = (int)(index / imagesPerRow) * Game.tileSize;
         }
-        public Enemy(string name, Vector2 position, Color color)
-        {
-            //Idk no refrences
-            this.name = name;
-            this.position = position;
-            this.color = color;
-        }
-
+        /// <summary>
+        /// This function is used to create the variables needed for the enemies for the gameloop
+        /// The enemies can be created in the enemy editor before the game starts
+        /// </summary>
+        /// <param name="name">Is the name of the enemy</param>
+        /// <param name="tileID">Is the enemy sprite</param>
+        /// <param name="hitPoints">Is the HP of the enemy</param>
         public Enemy(string name, int tileID, int hitPoints)
         {
             //Adds a new enemy

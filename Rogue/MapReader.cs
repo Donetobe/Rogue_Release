@@ -53,7 +53,11 @@ namespace Rogue
            
             return loadedMap;
         }
-
+        /// <summary>
+        /// This function is used to read the map file and create the ground, enemy and item layers
+        /// </summary>
+        /// <param name="filename">Is the file that the function reads wich must be in .tmj format</param>
+        /// <returns>The function returns the map needed for the gameloop</returns>
         public Map ReadTiledMapFromFile(string filename)
         {
 

@@ -15,6 +15,12 @@ namespace Rogue
 {
     internal class Game
     {
+        /// <summary>
+        /// This class is the main part of the program
+        /// Its <code> public void Run() </code> is called in the Program.cs where the program starts
+        /// </summary>
+
+
         //Player
         PlayerCharacter player;
 
@@ -68,6 +74,12 @@ namespace Rogue
         //Screen width and height
         const int screen_width = 1280;
         const int screen_height = 720;
+
+        /// <summary>
+        /// This function starts the game.
+        /// First it initializes the game and then it starts the main gameloop
+        /// If the main gameloop is exited the program closes
+        /// </summary>
         public void Run()
         {
             //Game starts in Main menu
@@ -216,6 +228,18 @@ namespace Rogue
             }
         }
 
+        /// <summary>
+        /// This is the game loop
+        /// First it sets up the gamestate stack
+        /// From the main menu where the programs starts as specified in 
+        /// <code> public void Run() </code> the player can start the game or
+        /// go to the pause or option menus
+        /// After starting the game the player will go to the character creator
+        /// where the player will choose race, class and a name.
+        /// When the players has given the character information needed for the game to start
+        /// the actual main gameloop will start in <code> void Update() </code>
+        /// In the main gameloop the player can only move and go to the pause menu
+        /// </summary>
         void GameLoop()
         {
             bool gameIsOn = true;
